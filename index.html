@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard 24–30 Sep 2025 — v6</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <h1>Dashboard — 24 a 30 de septiembre 2025 <span class="badge">v6</span></h1>
+  <nav class="tabs">
+    <button data-tab="resumen" class="active">Resumen</button>
+    <button data-tab="produccion">Producción</button>
+    <button data-tab="avance">Avance</button>
+    <button data-tab="taladros">Taladros Largos</button>
+    <button data-tab="relleno">Relleno</button>
+    <button data-tab="scoops">Scoops</button>
+    <button data-tab="jumbos">Jumbos</button>
+    <button data-tab="jumbos_sector">Jumbos por sector</button>
+    <button data-tab="ratios_word">Ratios (Word)</button>
+    <button data-tab="graficos">Gráficos</button>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div id="status" class="status ok">Inicializando…</div>
+
+  <section id="resumen" class="card tab active">
+    <h2>Resumen</h2>
+    <div class="content">
+      <div class="grid">
+        <div><label>Desde</label><input type="date" id="f_ini"></div>
+        <div><label>Hasta</label><input type="date" id="f_fin"></div>
+        <div class="btns">
+          <button id="filtrar">Filtrar</button>
+          <button class="secondary" id="export_resumen">Exportar CSV</button>
+        </div>
+      </div>
+      <div class="table-wrap"><table id="tbl_resumen"></table></div>
+    </div>
+  </section>
+
+  <section id="produccion" class="card tab">
+    <h2>Producción (TMS)</h2>
+    <div class="content">
+      <div class="btns"><button class="secondary" id="export_prod">Exportar CSV</button></div>
+      <div class="table-wrap"><table id="tbl_prod"></table></div>
+    </div>
+  </section>
+
+  <section id="avance" class="card tab">
+    <h2>Avance total (m)</h2>
+    <div class="content">
+      <div class="btns"><button class="secondary" id="export_av">Exportar CSV</button></div>
+      <div class="table-wrap"><table id="tbl_av"></table></div>
+    </div>
+  </section>
+
+  <section id="taladros" class="card tab">
+    <h2>Taladros Largos — Raptor / Mini Titan</h2>
+    <div class="content">
+      <div class="btns"><button class="secondary" id="export_tl">Exportar CSV</button></div>
+      <div class="table-wrap"><table id="tbl_tl"></table></div>
+    </div>
+  </section>
+
+  <section id="relleno" class="card tab">
+    <h2>Relleno Hidráulico (m³)</h2>
+    <div class="content">
+      <div class="btns"><button class="secondary" id="export_rel">Exportar CSV</button></div>
+      <div class="table-wrap"><table id="tbl_rel"></table></div>
+    </div>
+  </section>
+
+  <section id="scoops" class="card tab">
+    <h2>Scoops — Utilización (%)</h2>
+    <div class="content">
+      <div class="btns"><button class="secondary" id="export_sc">Exportar CSV</button></div>
+      <div class="table-wrap"><table id="tbl_sc"></table></div>
+    </div>
+  </section>
+
+  <section id="jumbos" class="card tab">
+    <h2>Jumbos — D.Mec / Utilización (%)</h2>
+    <div class="content">
+      <div class="btns"><button class="secondary" id="export_jb">Exportar CSV</button></div>
+      <div class="table-wrap"><table id="tbl_jb"></table></div>
+    </div>
+  </section>
+
+  <section id="jumbos_sector" class="card tab">
+    <h2>Jumbos por sector — Programado vs Ejecutado</h2>
+    <div class="content">
+      <p class="muted">Los datos se guardan en tu navegador (localStorage). Fechas 24–30/09/2025.</p>
+      <div class="grid4">
+        <div><label>Desde</label><input type="date" id="js_ini"></div>
+        <div><label>Hasta</label><input type="date" id="js_fin"></div>
+        <div><label>Tipo</label>
+          <select id="js_tipo">
+            <option value="">Todos</option>
+            <option>Frontonero</option>
+            <option>Empernador</option>
+          </select>
+        </div>
+        <div><label>Sector</label><input id="js_sector" placeholder="Ej.: 850NE"></div>
+      </div>
+      <div class="btns">
+        <button id="js_filter">Aplicar filtros</button>
+        <button class="secondary" id="js_clear">Limpiar</button>
+        <button class="secondary" id="js_export">Exportar CSV</button>
+        <button class="warn" id="js_reset">Restablecer plantilla</button>
+      </div>
+      <div class="table-wrap"><table id="js_tbl"></table></div>
+      <h3>Totales por fecha/sector</h3>
+      <div class="table-wrap"><table id="js_tot"></table></div>
+      <div class="grid2">
+        <div class="chart-card">
+          <h3>Cumplimiento por equipo</h3>
+          <canvas id="js_ch_eq" width="800" height="360"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Totales por fecha/sector (Prog vs Real)</h3>
+          <canvas id="js_ch_tot" width="800" height="360"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ratios_word" class="card tab">
+    <h2>Ratios y Cantidad de Equipos (extraídos del Word)</h2>
+    <div class="content">
+      <p class="muted">Resumen de flota y rendimientos promedios (m/hr o tn/hr) según documento de la unidad.</p>
+      <div class="table-wrap"><table id="tbl_counts"></table></div>
+      <h3>Detalle por categoría</h3>
+      <div class="grid2">
+        <div class="table-wrap"><table id="tbl_taladros"></table></div>
+        <div class="table-wrap"><table id="tbl_jumbos_det"></table></div>
+      </div>
+      <div class="grid2">
+        <div class="table-wrap"><table id="tbl_sc4"></table></div>
+        <div class="table-wrap"><table id="tbl_sc6"></table></div>
+      </div>
+      <div class="table-wrap"><table id="tbl_otros"></table></div>
+    </div>
+  </section>
+
+  <section id="graficos" class="card tab">
+    <h2>Gráficos</h2>
+    <div class="content">
+      <div class="grid2" style="grid-template-columns:1fr 1fr">
+        <div class="chart-card">
+          <h3>% de Cumplimiento por Actividad</h3>
+          <canvas id="ch_cumpl" width="800" height="360"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Producción — Programado vs Real (Barras)</h3>
+          <canvas id="ch_prod" width="800" height="360"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="muted">App offline — datos embebidos (24–30/09/2025) + ratios del Word. Si no ves datos, prueba Ctrl+F5.</div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

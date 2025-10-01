@@ -1,0 +1,28 @@
+:root{--bg:#0b0f14;--card:#151b22;--muted:#8aa0b6;--accent:#09a37a;--accent4:#f66a6a;--text:#eaf2fb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 system-ui,Segoe UI,Roboto,Arial}
+header{padding:18px 20px;border-bottom:1px solid #1e2530;background:linear-gradient(180deg,#111720,#0b0f14)}
+h1{margin:0 0 10px;font-size:20px}.badge{font-size:11px;background:#273242;color:#cfe7ff;padding:4px 8px;border-radius:8px;margin-left:8px}
+.wrap{padding:16px}
+.status{padding:10px 12px;border-radius:10px;margin-bottom:12px;border:1px solid #2b3a50}
+.status.ok{background:#0f141b;color:#9ad8ff}.status.err{background:#331010;color:#ffd6d6;border-color:#6b2c2c}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{background:#223042;color:#d7e4f2;border:1px solid #2b3a50;border-radius:10px;padding:8px 10px;cursor:pointer}
+.tabs button.active{background:var(--accent);color:#04261f;border-color:#0f5a45}
+.card{background:#151b22;border:1px solid #1f2732;border-radius:14px;box-shadow:0 3px 18px rgba(0,0,0,.25);margin-bottom:16px}
+.card h2{margin:0;padding:14px 16px;border-bottom:1px solid #1f2732;font-size:15px}
+.card .content{padding:14px 16px}
+.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:end}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:end}
+.table-wrap{overflow:auto;border:1px solid #223042;border-radius:12px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border-bottom:1px solid #263142;text-align:left}
+th{position:sticky;top:0;background:#121923}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+button{border:0;background:var(--accent);color:#04261f;padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+button.secondary{background:#273242;color:#cfe7ff}button.warn{background:var(--accent4);color:#2a0b0b}
+input,select{width:100%;padding:10px;border-radius:10px;border:1px solid #2a3340;background:#0f141b;color:#eaf2fb}
+.tab{display:none}.tab.active{display:block}
+.chart-card{background:#0f141b;border:1px solid #223042;border-radius:12px;padding:12px}
